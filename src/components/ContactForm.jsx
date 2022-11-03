@@ -1,22 +1,22 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { FaUser, FaPhone } from "react-icons/fa";
 import { BsGenderTrans } from "react-icons/bs";
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
 
 const ContactForm = () => {
-	const { name, number, setName, setNumber, setGender } =
+	const { name, number, gender, setName, setNumber, setGender, writeToDatabase } =
 		useContext(ContactContext);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(name);
+        writeToDatabase();
 	};
 
 	return (
 		<Form className="border p-5" onSubmit={handleSubmit}>
-			<h3 className="text-center mb-4">New Contact</h3>
+			<h3 className="text-center mb-5">New Contact</h3>
 			<Form.Group className="d-flex border p-1 my-2">
 				<FaUser style={{ fontSize: "1.5rem", display: "flex" }} />
 				<Form.Control
@@ -43,9 +43,10 @@ const ContactForm = () => {
 				<BsGenderTrans style={{ fontSize: "1.5rem", display: "flex" }} />
 				<Form.Select
 					className="border-0"
+                    value={gender}
 					onChange={(e) => setGender(e.target.value)}
 				>
-					<option value="Gender" disabled>
+					<option value="Gender">
 						Gender
 					</option>
 					<option value="Male">Male</option>
@@ -53,6 +54,7 @@ const ContactForm = () => {
 					<option value="Other">Other</option>
 				</Form.Select>
 			</Form.Group>
+            <Button type='submit' style={{width: '100%'}} className='mt-4'>Submit</Button>
 		</Form>
 	);
 };
