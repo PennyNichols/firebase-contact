@@ -7,7 +7,7 @@ export const ContactContext = createContext();
 const ContactContextProvider = ({ children }) => {
 	const [name, setName] = useState("");
 	const [number, setNumber] = useState("");
-	const [gender, setGender] = useState(null);
+	const [gender, setGender] = useState("");
 
 	return (
 		<ContactContext.Provider
