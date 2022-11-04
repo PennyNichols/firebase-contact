@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Table } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import { ContactContext } from "../context/ContactContext";
 import SingleContact from "./SingleContact";

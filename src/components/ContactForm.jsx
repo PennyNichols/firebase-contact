@@ -5,6 +5,19 @@ import { BsGenderTrans } from "react-icons/bs";
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
 
+
+function formatNum(value) {
+    if (!value) return value;
+    const num = value.replace(/[^\d]/g, "");
+    const numLength = num.length;
+    if (numLength < 4) return num;
+    if (numLength < 6) {
+      return `${num.slice(0, 3)}-${num.slice(3)}`;
+    }
+    return `${num.slice(0, 3)}-${num.slice(3, 6)}-${num.slice(6, 10)}`;
+  }
+
+
 const ContactForm = () => {
 	const {
 		name,
@@ -17,6 +30,10 @@ const ContactForm = () => {
         handleSubmit,
 	} = useContext(ContactContext);
 
+    const handleNumInput = (e) => {
+        const formattedNum = formatNum(e.target.value);
+        setNumber(formattedNum)
+    }
 	
 
 	return (
@@ -54,7 +71,7 @@ const ContactForm = () => {
 					type="tel"
 					placeholder="555-555-5555"
 					value={number}
-					onChange={(e) => setNumber(e.target.value)}
+					onChange={(e)=>handleNumInput(e)}
 					required
 				/>
 			</Form.Group>
