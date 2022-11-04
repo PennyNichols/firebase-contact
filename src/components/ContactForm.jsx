@@ -22,15 +22,17 @@ const ContactForm = () => {
 		e.preventDefault();
 		if (!edit) {
 			writeToDatabase();
+            alert('Contact Added')
 		} else {
 			updateContact();
+            alert('Contact Updated')
 		}
 	};
 
 	return (
 		<Form
 			style={{
-				backgroundColor: "rgba(255,255,255,.3)",
+				backgroundColor: "rgba(255,255,255,.5)",
 				backdropFilter: "blur(5px)",
                 maxHeight: '25rem'
 			}}
@@ -82,7 +84,7 @@ const ContactForm = () => {
 					<option value="Other">Other</option>
 				</Form.Select>
 			</Form.Group>
-			<Button type="submit" style={{ width: "100%", background: 'rgb(240,211,110)', background: 'linear-gradient(90deg, rgba(240,211,110,1) 0%, rgba(208,116,208,1) 39%, rgba(113,0,255,1) 70%, rgba(22,4,145,1) 92%)' }} className="mt-4 border-0 shadow">
+			<Button type="submit" style={{ width: "100%", backgroundColor: "rgba(255,255,255,.4)", color: 'black' }} className="mt-4 border-0 shadow">
 				Submit
 			</Button>
 		</Form>
