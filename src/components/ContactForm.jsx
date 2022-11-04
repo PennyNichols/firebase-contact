@@ -6,21 +6,45 @@ import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
 
 const ContactForm = () => {
-	const { name, number, gender, setName, setNumber, setGender, writeToDatabase } =
-		useContext(ContactContext);
+	const {
+		name,
+		number,
+		gender,
+		setName,
+		setNumber,
+		setGender,
+		writeToDatabase,
+		updateContact,
+		edit,
+	} = useContext(ContactContext);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-        writeToDatabase();
+		if (!edit) {
+			writeToDatabase();
+		} else {
+			updateContact();
+		}
 	};
 
 	return (
-		<Form className="border p-5" onSubmit={handleSubmit}>
+		<Form
+			style={{
+				backgroundColor: "rgba(255,255,255,.3)",
+				backdropFilter: "blur(5px)",
+                maxHeight: '25rem'
+			}}
+			className="p-5 shadow-lg"
+			onSubmit={handleSubmit}
+		>
 			<h3 className="text-center mb-5">New Contact</h3>
-			<Form.Group className="d-flex border p-1 my-2">
-				<FaUser style={{ fontSize: "1.5rem", display: "flex" }} />
+			<Form.Group className="d-flex p-1 my-2">
+				<FaUser
+					style={{ fontSize: "1.5rem", display: "flex", alignSelf: "center" }}
+				/>
 				<Form.Control
-					className="border-0"
+					style={{ backgroundColor: "rgba(255,255,255,.4)" }}
+					className="border-0 ms-3"
 					type="text"
 					placeholder="Name"
 					value={name}
@@ -28,10 +52,13 @@ const ContactForm = () => {
 					required
 				/>
 			</Form.Group>
-			<Form.Group className="d-flex border p-1 my-2">
-				<FaPhone style={{ fontSize: "1.5rem", display: "flex" }} />
+			<Form.Group className="d-flex p-1 my-2">
+				<FaPhone
+					style={{ fontSize: "1.5rem", display: "flex", alignSelf: "center" }}
+				/>
 				<Form.Control
-					className="border-0"
+					style={{ backgroundColor: "rgba(255,255,255,.4)" }}
+					className="border-0 ms-3"
 					type="tel"
 					placeholder="555-555-5555"
 					value={number}
@@ -39,22 +66,25 @@ const ContactForm = () => {
 					required
 				/>
 			</Form.Group>
-			<Form.Group className="d-flex border p-1 my-2">
-				<BsGenderTrans style={{ fontSize: "1.5rem", display: "flex" }} />
+			<Form.Group className="d-flex p-1 my-2">
+				<BsGenderTrans
+					style={{ fontSize: "1.5rem", display: "flex", alignSelf: "center" }}
+				/>
 				<Form.Select
-					className="border-0"
-                    value={gender}
+					style={{ backgroundColor: "rgba(255,255,255,.4)" }}
+					className="border-0 ms-3"
+					value={gender}
 					onChange={(e) => setGender(e.target.value)}
 				>
-					<option value="Gender">
-						Gender
-					</option>
+					<option value="Gender">Gender</option>
 					<option value="Male">Male</option>
 					<option value="Female">Female</option>
 					<option value="Other">Other</option>
 				</Form.Select>
 			</Form.Group>
-            <Button type='submit' style={{width: '100%'}} className='mt-4'>Submit</Button>
+			<Button type="submit" style={{ width: "100%", background: 'rgb(240,211,110)', background: 'linear-gradient(90deg, rgba(240,211,110,1) 0%, rgba(208,116,208,1) 39%, rgba(113,0,255,1) 70%, rgba(22,4,145,1) 92%)' }} className="mt-4 border-0 shadow">
+				Submit
+			</Button>
 		</Form>
 	);
 };

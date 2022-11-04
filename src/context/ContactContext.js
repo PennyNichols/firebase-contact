@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 import { db } from "../firebase/firebase";
-import { getDatabase, ref, set, push, onValue } from "firebase/database";
+import { ref, set, push, onValue, remove, update } from "firebase/database";
 import { useEffect } from "react";
 
 export const ContactContext = createContext();
@@ -11,6 +11,8 @@ const ContactContextProvider = ({ children }) => {
 	const [number, setNumber] = useState("");
 	const [gender, setGender] = useState("");
 	const [contacts, setContacts] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [updateId, setUpdateId] = useState("")
 
 	const writeToDatabase = () => {
 		const contactRef = ref(db, "Contact");
@@ -30,12 +32,29 @@ const ContactContextProvider = ({ children }) => {
 		onValue(contactRef, (snapshot) => {
 			const data = snapshot.val();
 			const contactArr = [];
-			for (let contact in data) {
-				contactArr.push({ contact, ...data[contact] });
+			for (let id in data) {
+				contactArr.push({ id, ...data[id] });
 			}
 			setContacts(contactArr);
 		});
 	}, []);
+
+    const deleteContact = (id) => {
+        remove(ref(db, 'Contact/' + id))
+    }
+
+    const updateContact = () =>{
+        update(ref(db, 'Contact/' + updateId), {
+            name: name,
+			number: number,
+			gender: gender,
+        })
+        setName("");
+		setNumber("");
+		setGender("");
+        setEdit(false);
+        setUpdateId('')
+    }
 
 	return (
 		<ContactContext.Provider
@@ -47,7 +66,12 @@ const ContactContextProvider = ({ children }) => {
 				setNumber,
 				setGender,
 				writeToDatabase,
-                contacts
+                contacts,
+                deleteContact,
+                updateContact,
+                edit,
+                setEdit,
+                setUpdateId
 			}}
 		>
 			{children}

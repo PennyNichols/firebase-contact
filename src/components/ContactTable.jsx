@@ -12,11 +12,11 @@ const ContactTable = () => {
 
 
 	return (
-		<div className='text-center border p-5'>
+		<div className='text-center p-5 shadow-lg' style={{backgroundColor: 'rgba(255,255,255,.3)', backdropFilter: 'blur(5px)'}}>
 			<h3 className="text-center mb-4">Contacts</h3>
-			<Table style={{ width: "40vw" }}  bordered>
+			<Table style={{ width: "40vw" }}  >
 				<thead>
-					<tr className="text-center">
+					<tr className="text-center" >
 						<th>Name</th>
 						<th>Phone Number</th>
 						<th>Gender</th>
