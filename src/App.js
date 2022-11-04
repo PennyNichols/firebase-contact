@@ -3,7 +3,6 @@ import ContactForm from './components/ContactForm';
 import ContactTable from './components/ContactTable';
 import ContactContextProvider from './context/ContactContext';
 
-const url = 'https://source.unsplash.com/random/900×700/?sunset'
 
 function App() {
 

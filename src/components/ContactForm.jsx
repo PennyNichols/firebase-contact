@@ -13,21 +13,11 @@ const ContactForm = () => {
 		setName,
 		setNumber,
 		setGender,
-		writeToDatabase,
-		updateContact,
 		edit,
+        handleSubmit,
 	} = useContext(ContactContext);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (!edit) {
-			writeToDatabase();
-            alert('Contact Added')
-		} else {
-			updateContact();
-            alert('Contact Updated')
-		}
-	};
+	
 
 	return (
 		<Form
@@ -85,7 +75,7 @@ const ContactForm = () => {
 				</Form.Select>
 			</Form.Group>
 			<Button type="submit" style={{ width: "100%", backgroundColor: "rgba(255,255,255,.4)", color: 'black' }} className="mt-4 border-0 shadow">
-				Submit
+                {edit ? 'Update' : 'Submit'}
 			</Button>
 		</Form>
 	);

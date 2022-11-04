@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { createContext } from "react";
+import { useState, useEffect, createContext } from "react";
 import { db } from "../firebase/firebase";
 import { ref, set, push, onValue, remove, update } from "firebase/database";
-import { useEffect } from "react";
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const ContactContext = createContext();
 
@@ -39,8 +39,21 @@ const ContactContextProvider = ({ children }) => {
 		});
 	}, []);
 
+    const handleSubmit = (e) => {
+		e.preventDefault();
+		if (!edit) {
+			writeToDatabase();
+            toast.success('Contact Added')
+
+		} else {
+			updateContact();
+            
+		}
+	};
+
     const deleteContact = (id) => {
         remove(ref(db, 'Contact/' + id))
+        toast.error('ContactDeleted')
     }
 
     const updateContact = () =>{
@@ -54,7 +67,9 @@ const ContactContextProvider = ({ children }) => {
 		setGender("");
         setEdit(false);
         setUpdateId('')
+        toast.success('Contact Updated');
     }
+
 
 	return (
 		<ContactContext.Provider
@@ -71,7 +86,8 @@ const ContactContextProvider = ({ children }) => {
                 updateContact,
                 edit,
                 setEdit,
-                setUpdateId
+                setUpdateId,
+                handleSubmit
 			}}
 		>
 			{children}
