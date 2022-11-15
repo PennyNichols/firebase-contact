@@ -22,7 +22,7 @@ const SingleContact = (props) => {
 		<tr className="text-center">
 			<td className="text-capitalize border-0">{name}</td>
 			<td className="border-0">{number}</td>
-			<td className="text-capitalize border-0">{gender}</td>
+			<td className="text-capitalize border-0 gender">{gender}</td>
 			<td  className="text-danger border-0" >
 				<RiDeleteBinFill onClick={() => deleteContact(id)} style={{fontSize:'1.5rem', display:'flex', alignItems: 'center', justifyContent:'center', margin:'auto', cursor: 'pointer'}} />
 			</td>

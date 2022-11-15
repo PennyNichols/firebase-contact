@@ -43,7 +43,7 @@ const ContactForm = () => {
 				backdropFilter: "blur(5px)",
                 maxHeight: '25rem'
 			}}
-			className="p-5 shadow-lg"
+			className="p-5 shadow-lg form"
 			onSubmit={handleSubmit}
 		>
 			<h3 className="text-center mb-5">New Contact</h3>
